@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Black vs White</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1 class="title header__title">Black vs White</h1>
+      <div class="button header__button_first" data-action="reset">New game</div>
+      <div class="button header__button_second" data-action="hint">How to play</div>
+    </header>
+    <main class="main">
+      <div class="table"></div>
+      <div class="side-select side-select_hidden" data-panel="side-select">
+        <h2 class="title side-select__title">Choose your side</h2>
+        <div class="side-select__sides">
+          <div class="side-select__side black" data-action="start" data-color="black"></div>
+          <div class="side-select__side white" data-action="start" data-color="white"></div>
+        </div>
+        <div class="button side-select__button" data-action="hide">Cancel</div>
+      </div>
+      <div class="message message_hidden" data-panel="message">
+        <h2 class="title message__title"></h2>
+        <div class="button message__button" data-action="reset">New game</div>
+        <div class="button message__button" data-action="hide">OK</div>
+      </div>
+      <div class="hint hint_hidden" data-panel="hint">
+        <div class="hint__container">
+          <h2 class="title hint__title">Rules</h2>
+          <p class="hint__text">Choose a side. Make moves to the cells. Make a line of 4 cells of your color in a row - vertically, horizontally or diagonally. Don't let the computer do the same.</p>
+          <p class="hint__text">And remember - Black move first!</p>
+          <h2 class="title hint__title">Controls</h2>
+          <p class="hint__text">The cell to move is chosen by voice. The name of the cell consists of two words - the name of the column and the name of the line.</p>
+          <ul class="hint__list">
+            <li class="hint__command">A - alpha (алфа)</li>
+            <li class="hint__command">B - bravo (бравоу)</li>
+            <li class="hint__command">C - charlie (чали)</li>
+            <li class="hint__command">D - delta (делта)</li>
+            <li class="hint__command">E - echo (экоу)</li>
+          </ul>
+          <p class="hint__text">For example, the upper right corner is "eco alpha".</p>
+          <p class="hint__text">Press the "Listen", record your voice command. You can re record command if something went wrong. When you get satisfied, press "Confirm" to make your move.</p>
+          <p class="hint__text">Or if you don't want to use voice control - just press the button below to switch onto mouse or touchscreen.</p>
+          <div class="button hint__button" data-action="hide">Got it!</div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer__recorders">
+        <div class="button footer__button" data-action="recognize">Listen</div>
+        <div class="button footer__button button_inactive" data-action="confirm">Confirm</div>
+      </div>
+      <div class="button" data-action="switch" data-mode="voice"><span class="button__highlight">Voice</span> / <span>Click</span></div>
+    </footer>
+  </div>
+  <script src="./js/index.js" type="module"></script>
+</body>
+</html>

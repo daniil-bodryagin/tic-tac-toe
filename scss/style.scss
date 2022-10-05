@@ -1,0 +1,455 @@
+$black: #000;
+$white: #fff;
+$gray: #808080;
+$mainColor: #ff0;
+$xs: 375px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$animationInterval: .3s;
+
+@font-face {
+  font-family: 'Lakeshore';
+  src: url('../fonts/Lakeshore-Regular.otf');
+  src: url('../fonts/Lakeshore-Regular.otf') format('opentype'),
+     url('../fonts/Lakeshore-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  margin: 0;
+  font-family: 'Play', sans-serif;
+  font-size: 12px;
+
+  @media (min-height: $md), (min-width: $lg) {
+    font-size: 16px;
+  }
+}
+
+.app {
+  display: grid;
+  grid-template-rows: 7em 1fr 7em;
+  height: 100vh;
+  background-color: $mainColor;
+  width: 100%;
+
+  @media (min-width: $lg) {
+    width: 960px;
+    margin: 0 auto;
+  }
+
+  @media (orientation: landscape) {
+    grid-template-rows: 3em 1fr 3em;
+  }
+
+  @media (orientation: landscape) and (min-width: $lg) {
+    grid-template-rows: 7em 1fr 7em;
+  }
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: 1fr 8em;
+  place-items: center;
+  box-sizing: border-box;
+  border-bottom: .15rem solid $black;
+  background-color: $mainColor;
+
+  @media (orientation: landscape) {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 8em 8em;
+  }
+
+  @media (orientation: landscape) and (min-width: $lg) {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr 8em;
+  }
+
+  &__title {
+    grid-row: 1/3;
+    grid-column: 1/2;
+    place-self: center;
+    font-size: 2rem;
+    line-height: 1em;
+
+    @media (min-width: $xs) {
+      font-size: 3rem;
+      line-height: 1.5em;
+    }
+
+    @media (min-width: $sm) {
+      grid-column: 1/-1;
+    }
+
+    @media (min-width: $lg), (min-height: $lg) {
+      font-size: 6rem;
+      line-height: 3em;
+    }
+  }
+
+  &__button_first {
+    grid-row: 1/2;
+    grid-column: 2/3;
+
+    @media (orientation: landscape) {
+      grid-row: 1/2;
+      grid-column: 2/3;
+    }
+
+    @media (orientation: landscape) and (min-width: $lg) {
+      grid-row: 1/2;
+      grid-column: 2/3;
+    }
+  }
+
+  &__button_second {
+    grid-row: 2/3;
+    grid-column: 2/3;
+
+    @media (orientation: landscape) {
+      grid-row: 1/2;
+      grid-column: 3/4;
+    }
+
+    @media (orientation: landscape) and (min-width: $lg) {
+      grid-row: 2/3;
+      grid-column: 2/3;
+    }
+  }
+}
+
+.title {
+  margin: -.5em 0 0;
+  padding: 0 .2em;
+  font-family: 'Lakeshore', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.main {
+  position: relative;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  border-bottom: .15rem solid $black;
+  overflow: hidden;
+}
+
+.table {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  gap: .2rem;
+  width: 180px;
+  height: 180px;
+
+  @media (orientation: portrait), (min-height: $xs) and (orientation: landscape) {
+    width: 270px;
+    height: 270px;
+  }
+
+  @media (min-width: $xs) and (orientation: portrait), (min-height: $sm) and (orientation: landscape) {
+    width: 350px;
+    height: 350px;
+  }
+
+  @media (min-width: $sm) and (orientation: portrait), (min-height: $md) and (orientation: landscape) {
+    width: 500px;
+    height: 500px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: .2rem;
+  }
+
+  &__cell {
+    display: grid;
+    place-content: center;
+    box-sizing: border-box;
+    border: .2rem solid $gray;
+    border-radius: .5rem;
+    font-size: 1rem;
+    color: $gray;
+    cursor: pointer;
+
+    @media (orientation: portrait), (min-height: $xs) and (orientation: landscape) {
+      font-size: 1.5rem;
+    }
+  
+    @media (min-width: $xs) and (orientation: portrait), (min-height: $sm) and (orientation: landscape) {
+      font-size: 2rem;
+    }
+  
+    @media (min-width: $sm) and (orientation: portrait), (min-height: $md) and (orientation: landscape) {
+      font-size: 2.7rem;
+    }
+  }
+}
+
+.hint {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-bottom: .15rem solid $black;
+  background-color: $mainColor;
+  overflow: auto;
+  transition: top $animationInterval ease-in;
+
+  &_hidden {
+    top: -100%;
+    transition: top $animationInterval ease-in;
+  }
+
+  &__container {
+    max-width: 350px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 1rem;
+  }
+
+  &__title {
+    margin: 0 0 .8rem;
+    text-align: center;
+  }
+
+  &__text {
+    margin: 0;
+    text-align: justify;
+    text-indent: 1.5em;
+  }
+
+  &__list {
+    margin: .8em 0;
+  }
+
+  &__command {
+    list-style: none;
+  }
+
+  &__button {
+    width: 6rem;
+    margin: .8rem auto .8rem;
+    text-align: center;
+  }
+}
+
+.button {
+  padding: .5em 1em;
+  border-radius: 1em;
+  color: $white;
+  background-color: $black;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: inset .1rem .1rem 0 .1rem $white,  inset -.1rem -.1rem 0 .1rem $white;
+  }
+
+  &_inactive {
+    background-color: $gray;
+    box-shadow: none;
+  }
+
+  &_active {
+    background-color: #a30000;
+    box-shadow: none;
+  }
+
+  &__highlight {
+    color: $mainColor;
+  }
+}
+
+.side-select {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 270px;
+  height: 180px;
+  display: grid;
+  place-content: center;
+  box-sizing: border-box;
+  border: .15rem solid $black;
+  background-color: $mainColor;
+  transform: translate(-50%, -50%);
+  transition: left $animationInterval ease-in;
+
+  @media (min-width: $xs) and (orientation: portrait), (min-height: $xs) and (orientation: landscape) {
+    width: 350px;
+    height: 230px;
+  }
+
+  @media (min-width: $sm) and (orientation: portrait), (min-height: $sm) and (orientation: landscape) {
+    width: 550px;
+    height: 360px;
+  }
+
+  &_hidden {
+    left: 150%;
+    transition: left $animationInterval ease-in;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 2rem;
+
+    @media (min-width: $xs) and (orientation: portrait), (min-height: $xs) and (orientation: landscape) {
+      font-size: 3rem;
+    }
+  
+    @media (min-width: $sm) and (orientation: portrait), (min-height: $sm) and (orientation: landscape) {
+      font-size: 4rem;
+    }
+  }
+
+  &__sides {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+  }
+
+  &__side {
+    margin: 1.5rem;
+    box-sizing: border-box;
+    border: .2rem solid $gray;
+    border-radius: 1rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+      transition: transform .1s;
+    }
+
+    @media (min-width: $xs) and (orientation: portrait), (min-height: $xs) and (orientation: landscape) {
+      width: 6.5rem;
+      height: 6.5rem;
+    }
+  
+    @media (min-width: $sm) and (orientation: portrait), (min-height: $sm) and (orientation: landscape) {
+      width: 8rem;
+      height: 8rem;
+    }
+  }
+
+  &__button {
+    width: 6rem;
+    margin: 0 auto .35rem;
+    text-align: center;
+  }
+}
+
+.black {
+  color: $white;
+  background-color: $black;
+}
+
+.white {
+  color: $black;
+  background-color: $white;
+}
+
+.message {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  width: 270px;
+  height: 180px;
+  display: grid;
+  place-content: center;
+  box-sizing: border-box;
+  border: .15rem solid $black;
+  background-color: $mainColor;
+  transform: translate(50%, -50%);
+  transition: right $animationInterval ease-in;
+
+  @media (min-width: $xs) and (orientation: portrait), (min-height: $xs) and (orientation: landscape) {
+    width: 350px;
+    height: 230px;
+  }
+
+  @media (min-width: $sm) and (orientation: portrait), (min-height: $sm) and (orientation: landscape) {
+    width: 550px;
+    height: 360px;
+  }
+
+  &_hidden {
+    right: 150%;
+    transition: right $animationInterval ease-in;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+
+    @media (min-width: $xs) and (orientation: portrait), (min-height: $xs) and (orientation: landscape) {
+      font-size: 4rem;
+    }
+  
+    @media (min-width: $sm) and (orientation: portrait), (min-height: $sm) and (orientation: landscape) {
+      font-size: 5rem;
+    }
+  }
+
+  &__button {
+    width: 6rem;
+    margin: .35rem auto .35rem;
+    text-align: center;
+  }
+}
+
+.footer {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  place-items: center;
+  width: 280px;
+  margin: 0 auto;
+
+  @media (orientation: landscape) {
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  @media (orientation: landscape) and (min-width: $lg) {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+  }
+
+  &__recorders {
+    place-self: stretch;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+
+    @media (orientation: landscape) {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+
+  &__button {
+  width: 6.5rem;
+  text-align: center;
+
+  &:first-child {
+    @media (orientation: landscape) {
+      width: 5.5rem;
+    }
+    
+    @media (orientation: landscape) and (min-width: $lg)  {
+      width: 6.5rem;
+    }
+  }
+
+  @media (orientation: landscape) {
+    width: auto;
+  }
+  }
+}
